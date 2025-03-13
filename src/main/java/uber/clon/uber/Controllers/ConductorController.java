@@ -45,4 +45,20 @@ public class ConductorController {
         conductorService.eliminarConductor(id); // Se desactiva (estado = false)
         return "redirect:/conductores"; // Redirige a la lista
     }
+
+    
+    // 🔹 Mostrar detalles de un conductor
+    @GetMapping("/detalle/{id}")
+    public String mostrarDetallesConductor(@PathVariable int id, Model model) {
+        // Llamamos al servicio para obtener el conductor
+        Conductor conductor = conductorService.obtenerConductor(id).orElse(null);
+
+        if (conductor == null) {
+            return "redirect:/conductores"; // Si no existe, vuelve a la lista
+        }
+        
+        model.addAttribute("conductor", conductor);
+        return "detalleConductor"; // Vista de detalles
+    }
+
 }

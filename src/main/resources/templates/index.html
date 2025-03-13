@@ -14,11 +14,12 @@
             <!-- Iterar sobre los conductores -->
             <div class="col-md-4" th:each="conductor : ${conductores}">
                 <div class="card p-3">
-                    <img th:src="@{/images/conductor.png}" class="card-img-top" alt="Foto Conductor">
+                    <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'" class="card-img-top" alt="Foto Conductor">
+                    
                     <div class="card-body">
                         <h5 class="card-title" th:text="${conductor.nombre}"></h5>
-                        <p class="card-text">Tipo de Auto: <span th:text="${conductor.tipoAuto}"></span></p>
-                        <a th:href="@{/detalleConductor/{id}(id=${conductor.id})}" class="btn btn-primary">Ver Detalles</a>
+                        <p class="card-text">Tipo de Auto: <span th:text="${conductor.tipoAutomovil}"></span></p>
+                        <a th:href="@{/conductores/detalle/{id}(id=${conductor.id})}" class="btn btn-primary">Ver Detalles</a>
                     </div>
                 </div>
             </div>

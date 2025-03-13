@@ -10,8 +10,8 @@
 <body>
     <div class="container mt-5">
         <h2>Detalles de <span th:text="${conductor.nombre}"></span></h2>
-        <p>Edad: <span th:text="${conductor.edad}"></span></p>
-        <p>Tipo de Automóvil: <span th:text="${conductor.tipoAuto}"></span></p>
+        <p>Fecha de nacimiento<span th:text="${conductor.fechaDeNacimiento}"></span></p>
+        <p>Tipo de Automóvil: <span th:text="${conductor.tipoAutomovil}"></span></p>
         <h4>Selecciona el tipo de viaje:</h4>
         <ul>
             <li><a th:href="@{/formReserva/{id}/{tipo}(id=${conductor.id}, tipo='corta')}" class="btn btn-outline-primary">Corta distancia - $7,000</a></li>
