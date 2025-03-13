@@ -1,0 +1,28 @@
+<!-- index.html - Lista de conductores -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conductores Disponibles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Selecciona un Conductor</h2>
+        <div class="row">
+            <!-- Iterar sobre los conductores -->
+            <div class="col-md-4" th:each="conductor : ${conductores}">
+                <div class="card p-3">
+                    <img th:src="@{/images/conductor.png}" class="card-img-top" alt="Foto Conductor">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${conductor.nombre}"></h5>
+                        <p class="card-text">Tipo de Auto: <span th:text="${conductor.tipoAuto}"></span></p>
+                        <a th:href="@{/detalleConductor/{id}(id=${conductor.id})}" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
