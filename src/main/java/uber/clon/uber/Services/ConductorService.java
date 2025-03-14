@@ -1,43 +1,54 @@
 package uber.clon.uber.Services;
 
 
-
 import uber.clon.uber.Models.Conductor;
 import uber.clon.uber.Repository.ConductorRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ConductorService {
-    private final ConductorRepository conductorRepository;
+    @Autowired
+    private ConductorRepository conductorRepository;
 
-    public ConductorService(ConductorRepository conductorRepository) {
-        this.conductorRepository = conductorRepository;
-    }
+    //public ConductorService(ConductorRepository conductorRepository) {
+    //    this.conductorRepository = conductorRepository;
+    //}
 
-    // 🔹 Listar solo conductores activos
+    // 🔹 Listar solo conductores treu = verdadero 
     public List<Conductor> listarConductores() {
-        return conductorRepository.findByEstadoTrue(); // ✅ Solo activos
+        return conductorRepository.findByEstadoTrue(); // ✅ Solo verdadero 
     }
 
     // 🔹 Buscar conductor por ID
-    public Optional<Conductor> obtenerConductor(int id) {
-        return conductorRepository.findById(id);
+    public Conductor obtenerConductor(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser nulo.");
+        }
+        return conductorRepository.findById(id).orElse(null);
     }
 
-    // 🔹 Guardar o actualizar conductor
+    // 🔹 crear un coductor 
     public Conductor guardarConductor(Conductor conductor) {
+        if (conductor == null) {
+            throw new IllegalArgumentException("El producto no puede ser nulo no puede venir en blanco.");
+        }
         return conductorRepository.save(conductor);
     }
 
     // 🔹 "Eliminar" (desactivar) un conductor
-    public void eliminarConductor(int id) {
-        Optional<Conductor> optionalConductor = conductorRepository.findById(id);
-        optionalConductor.ifPresent(conductor -> {
-            conductor.setEstado(false); // ✅ En lugar de borrar, se desactiva
-            conductorRepository.save(conductor);
-        });
+    public Conductor eliminarConductor(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser nulo.");
+        }
+        Conductor conductor = conductorRepository.findById(id).orElse(null);
+        if (conductor != null) {
+            conductor.setEstado(false);  
+            return conductorRepository.save(conductor);
+        }
+        return null;  
     }
 }

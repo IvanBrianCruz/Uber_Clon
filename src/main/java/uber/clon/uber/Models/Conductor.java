@@ -11,9 +11,13 @@
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
+        @Column
         private String nombre;
+        @Column
         private String apellido;
-        private LocalDate fechaDeNacimiento;
+        @Column
+        private LocalDate fechaDeNacimiento; //AA-MM-DD  - fecha actual = edad de la persona 
+        @Column
         private String automovil;
 
         @Enumerated(EnumType.STRING)
@@ -21,6 +25,7 @@
         // uno a uno 
         @OneToOne(mappedBy = "conductor", cascade = CascadeType.ALL)
         private Viaje viaje;
+        @Column
         private boolean estado = true; // ✅ Agregado (por defecto en true)
 
         // 🔹 Constructor vacío

@@ -52,7 +52,7 @@ public class ConductorController {
     @GetMapping("/detalle/{id}")
     public String mostrarDetallesConductor(@PathVariable int id, Model model) {
         // Llamamos al servicio para obtener el conductor
-        Conductor conductor = conductorService.obtenerConductor(id).orElse(null);
+        Conductor conductor = conductorService.obtenerConductor(id);
 
         if (conductor == null) {
             return "redirect:/conductores"; // Si no existe, vuelve a la lista
