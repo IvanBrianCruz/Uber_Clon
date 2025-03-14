@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Controller
@@ -46,7 +48,6 @@ public class ConductorController {
         return "redirect:/conductores"; // Redirige a la lista
     }
 
-    
     // 🔹 Mostrar detalles de un conductor
     @GetMapping("/detalle/{id}")
     public String mostrarDetallesConductor(@PathVariable int id, Model model) {
@@ -56,7 +57,10 @@ public class ConductorController {
         if (conductor == null) {
             return "redirect:/conductores"; // Si no existe, vuelve a la lista
         }
-        
+
+        int edad = Period.between(conductor.getFechaDeNacimiento(), LocalDate.now()).getYears();
+        model.addAttribute("edad", edad); // Agregar edad calculada
+
         model.addAttribute("conductor", conductor);
         return "detalleConductor"; // Vista de detalles
     }

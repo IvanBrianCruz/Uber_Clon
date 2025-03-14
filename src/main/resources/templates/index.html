@@ -1,4 +1,3 @@
-<!-- index.html - Lista de conductores -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,9 +16,17 @@
                     <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'" class="card-img-top" alt="Foto Conductor">
                     
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${conductor.nombre}"></h5>
+                        <h5 class="card-title" th:text="|${conductor.nombre} ${conductor.apellido}|"></h5>
+
+                        <p class="card-text">Modelo de auto: <span th:text="${conductor.automovil}"></span></p>
                         <p class="card-text">Tipo de Auto: <span th:text="${conductor.tipoAutomovil}"></span></p>
+                        
                         <a th:href="@{/conductores/detalle/{id}(id=${conductor.id})}" class="btn btn-primary">Ver Detalles</a>
+
+                        <!-- Formulario para eliminar conductor -->
+                        <form th:action="@{/conductores/eliminar/{id}(id=${conductor.id})}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este conductor?')">Eliminar</button>
+                        </form>
                     </div>
                 </div>
             </div>
