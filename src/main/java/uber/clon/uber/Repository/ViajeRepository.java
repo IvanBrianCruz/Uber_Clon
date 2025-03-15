@@ -5,6 +5,6 @@ import uber.clon.uber.Models.Viaje;
 
 import java.util.List;
 
-public interface ViajeRepository extends JpaRepository<Viaje, Long> {
+public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
     List<Viaje> findByEstadoTrue(); // ✅ Solo devuelve viajes activos
 }

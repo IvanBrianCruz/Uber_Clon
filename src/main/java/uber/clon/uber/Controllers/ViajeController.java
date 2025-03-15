@@ -1,61 +1,60 @@
 package uber.clon.uber.Controllers;
 
-import uber.clon.uber.Models.Viaje;
-import uber.clon.uber.Services.ViajeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+import uber.clon.uber.Models.Conductor;
+import uber.clon.uber.Models.TipoViaje;
+import uber.clon.uber.Models.Viaje;
+import uber.clon.uber.Services.ConductorService;
+import uber.clon.uber.Services.ViajeService;
 
 @Controller
-@RequestMapping("/viajes")
 public class ViajeController {
     private final ViajeService viajeService;
+    private final ConductorService conductorService;
 
-    public ViajeController(ViajeService viajeService) {
+    public ViajeController(ViajeService viajeService, ConductorService conductorService) {
         this.viajeService = viajeService;
+        this.conductorService = conductorService;
     }
 
-    // 🔹 Listar solo viajes activos
-    @GetMapping
-    public String listarViajes(Model model) {
-        List<Viaje> viajes = viajeService.listarViajes();
-        model.addAttribute("viajes", viajes);
-        return "viajes"; // Vista HTML que mostrará la lista
-    }
-
-    // 🔹 Mostrar detalles de un viaje específico
-    @GetMapping("/{id}")
-    public String obtenerViaje(@PathVariable Long id, Model model) {
-        Optional<Viaje> viaje = viajeService.obtenerViaje(id);
-        if (viaje.isPresent()) {
-            model.addAttribute("viaje", viaje.get());
-            return "detalleViaje"; // Vista con los detalles del viaje
+    // Mostrar el formulario de viaje con el conductor preseleccionado
+    @GetMapping("/formReserva/{idConductor}")
+    public String mostrarFormulario(@PathVariable("idConductor") Integer idConductor, Model model) {
+        Conductor conductor = conductorService.obtenerConductor(idConductor);
+        if (conductor == null) {
+            return "redirect:/conductores?error=ConductorNoEncontrado";
         }
-        return "redirect:/viajes"; // Si no existe, redirige a la lista
+
+        model.addAttribute("tiposViaje", TipoViaje.values());
+        model.addAttribute("conductor", conductor);
+        return "solicitarViaje";
     }
 
-    // 🔹 Mostrar formulario para solicitar un viaje
-    @GetMapping("/nuevo")
-    public String mostrarFormularioViaje(Model model) {
-        model.addAttribute("viaje", new Viaje());
-        return "formViaje"; // Vista HTML con el formulario
-    }
+    // Procesar el formulario y mostrar el resumen
+    @PostMapping("/confirmar-viaje")
+    public String confirmarViaje(
+            @RequestParam("tipoViaje") TipoViaje tipoViaje,
+            @RequestParam("nombreCliente") String nombreCliente,
+            @RequestParam("telefonoCliente") String telefonoCliente,
+            @RequestParam("puntoPartida") String puntoPartida,
+            @RequestParam("destino") String destino,
+            @RequestParam("conductorId") Integer conductorId,
+            Model model) {
+        
+        Conductor conductor = conductorService.obtenerConductor(conductorId);
+        if (conductor == null) {
+            return "redirect:/conductores?error=ConductorNoEncontrado";
+        }
 
-    // 🔹 Guardar un nuevo viaje
-    @PostMapping("/guardar")
-    public String guardarViaje(@ModelAttribute Viaje viaje) {
-        viajeService.guardarViaje(viaje);
-        return "redirect:/viajes"; // Redirige a la lista
-    }
+        Viaje nuevoViaje = new Viaje(tipoViaje, nombreCliente, telefonoCliente, puntoPartida, destino, conductor);
+        viajeService.guardarViaje(nuevoViaje);
 
-    // 🔹 "Eliminar" (desactivar) un viaje
-    @PostMapping("/eliminar/{id}")
-    public String eliminarViaje(@PathVariable Long id) {
-        viajeService.eliminarViaje(id); // ✅ Cambia estado a false en lugar de eliminar
-        return "redirect:/viajes";
+        model.addAttribute("viaje", nuevoViaje);
+        return "resumenViaje";
     }
 }
-

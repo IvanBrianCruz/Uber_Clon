@@ -1,42 +1,31 @@
 package uber.clon.uber.Services;
 
-
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import uber.clon.uber.Models.Viaje;
 import uber.clon.uber.Repository.ViajeRepository;
-import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
+
+//import java.util.List;
 
 @Service
 public class ViajeService {
-    private final ViajeRepository viajeRepository;
 
-    public ViajeService(ViajeRepository viajeRepository) {
-        this.viajeRepository = viajeRepository;
-    }
+    @Autowired
+    private ViajeRepository viajeRepository;
 
-    // 🔹 Listar solo viajes activos
-    public List<Viaje> listarViajes() {
-        return viajeRepository.findByEstadoTrue(); // ✅ Solo activos
-    }
-
-    // 🔹 Buscar viaje por ID
-    public Optional<Viaje> obtenerViaje(Long id) {
-        return viajeRepository.findById(id);
-    }
-
-    // 🔹 Guardar o actualizar viaje
+    // Guardar un viaje en la base de datos
     public Viaje guardarViaje(Viaje viaje) {
         return viajeRepository.save(viaje);
     }
 
-    // 🔹 "Eliminar" (desactivar) un viaje
-    public void eliminarViaje(Long id) {
-        Optional<Viaje> optionalViaje = viajeRepository.findById(id);
-        optionalViaje.ifPresent(viaje -> {
-            viaje.setEstado(false); // ✅ Se desactiva en lugar de eliminar
-            viajeRepository.save(viaje);
-        });
-    }
+   // Buscar un viaje por ID
+   public Viaje obtenerViajePorId(Integer id) {
+    return viajeRepository.findById(id).orElse(null);
+}
+
+
+    // Listar todos los viajes
+    //public List<Viaje> listarViajes() {
+    //    return viajeRepository.findAll();
+    //}
 }

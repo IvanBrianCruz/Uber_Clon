@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen del Viaje</title>
+</head>
+<body>
+    <h2>Resumen del Viaje</h2>
+    
+    <p><strong>Nombre del Cliente:</strong> <span th:text="${viaje.nombreCliente}"></span></p>
+    <p><strong>Teléfono:</strong> <span th:text="${viaje.telefonoCliente}"></span></p>
+    <p><strong>Punto de Partida:</strong> <span th:text="${viaje.puntoPartida}"></span></p>
+    <p><strong>Destino:</strong> <span th:text="${viaje.destino}"></span></p>
+    <p><strong>Tipo de Viaje:</strong> <span th:text="${viaje.tipo}"></span></p>
+    <p><strong>Conductor:</strong> <span th:text="${viaje.conductor.nombre}"></span></p>
+    <p><strong>Automóvil:</strong> <span th:text="${viaje.conductor.tipoAutomovil}"></span></p>
+    <p><strong>Costo del Viaje:</strong> $<span th:text="${viaje.costo}"></span></p>
+
+    <br>
+    <button onclick="window.print()">Imprimir</button>
+    <a href="/"><button>Volver al Inicio</button></a>
+</body>
+</html>
