@@ -1,76 +1,186 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Conductor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="icon" type="image" href="/img/logo.png">
+    <title>RIDE ON</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/img/fondo.png') no-repeat center center/cover; /* Imagen de fondo */
+            min-height: 100vh;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            backdrop-filter: blur(10px); /* Efecto vidrio */
+            background: rgba(147, 147, 147, 0.15); /* Transparente pero visible */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.209);
+            color: white;
+            z-index: 1000;
+        }
+        .logo img { 
+            height: 100px; /* Tamaño normal */
+        }
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            color: rgb(43, 43, 43);
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.2s ease-in-out, color 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        nav a:hover {   
+            transform: scale(1.1);
+            color: #000000; /* Azul Bootstrap */
+            text-decoration: none; /* Evita subrayado */
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .user-avatar img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        main {
+            padding-top: 100px; /* Espacio para que no se solape con el header */
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container mt-5">
-        <div class="card shadow-lg p-4">
-            <div class="row">
-                <!-- Imagen del conductor -->
-                <div class="col-md-4 text-center">
-                    <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'"
-                        class="rounded-circle img-fluid" alt="Foto Conductor">
-                </div>
+    <header>
+        <div class="logo">
+            <img src="/img/logo.png" alt="Logo Uber Clon">
+        </div>
+        <nav>
+            <a href="/RideOn/">Inicio</a>
+            <a href="/RideOn/conductores">Conductores</a>
+            <a href="/RideOn/nuevo">Registro de Conductores</a>
+        </nav>
+        <div class="user-avatar">
+            <img src="/img/avatar.png" alt="Usuario">
+        </div>
+    </header>
+    <main>
+        
 
-                <!-- Información del conductor -->
-                <div class="col-md-8">
-                    <h2 class="mb-3">Detalles de <span th:text="|${conductor.nombre} ${conductor.apellido}|"></span>
-                    </h2>
 
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <td th:text="${conductor.id}"></td>
-                            </tr>
-                            <tr>
-                                <th>Nombre Completo</th>
-                                <td th:text="|${conductor.nombre} ${conductor.apellido}|"></td>
-                            </tr>
-                            <tr>
-                                <th>Fecha de Nacimiento</th>
-                                <td th:text="${conductor.fechaDeNacimiento}"></td>
-                            </tr>
-                    
 
-                            <tr>
-                                <th>Edad: </th>
-                                <td th:text="${edad}"></td>
-                            </tr>
-                            <tr>
-                                <th>Automóvil</th>
-                                <td th:text="${conductor.automovil}"></td>
-                            </tr>
-                            <tr>
-                                <th>Tipo de Automóvil</th>
-                                <td th:text="${conductor.tipoAutomovil}"></td>
-                            </tr>
-                            <tr>
-                                <th>Estado</th>
-                                <td>
-                                    <span th:if="${conductor.estado}" class="text-success">Activo</span>
-                                    <span th:unless="${conductor.estado}" class="text-danger">Inactivo</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
 
-                    <!-- Botón para solicitar viaje -->
-                    <h4 class="mt-4">¿Listo para viajar?</h4>
-                    <a th:href="@{/formReserva/{id}(id=${conductor.id})}" class="btn btn-success btn-lg">
-                        🚖 Solicitar Viaje
-                    </a>
 
+        <main> 
+            <div class="container mt-5">
+                <div class="card shadow-lg p-4 border-0 bg-light bg-opacity-75">
+                    <div class="row align-items-center">
+                        <!-- Imagen del conductor -->
+                        <div class="col-md-4 text-center">
+                            <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'"
+                                class="rounded-circle img-fluid border border-secondary p-1" alt="Foto Conductor">
+                        </div>
+        
+                        <!-- Información del conductor -->
+                        <div class="col-md-8">
+                            <h2 class="text-primary fw-bold">
+                                <i class="bi bi-person-circle"></i> Detalles del Conductor
+                            </h2>
+                            <hr>
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-secondary"><i class="bi bi-key"></i> ID</th>
+                                        <td class="text-dark fw-semibold" th:text="${conductor.id}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-secondary"><i class="bi bi-person"></i> Nombre Completo</th>
+                                        <td class="text-dark fw-semibold" th:text="|${conductor.nombre} ${conductor.apellido}|"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-secondary"><i class="bi bi-calendar"></i> Fecha de Nacimiento</th>
+                                        <td class="text-dark fw-semibold" th:text="${conductor.fechaDeNacimiento}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-secondary"><i class="bi bi-hourglass"></i> Edad</th>
+                                        <td class="text-dark fw-semibold" th:text="${edad}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-secondary"><i class="bi bi-car-front"></i> Automóvil</th>
+                                        <td class="text-dark fw-semibold" th:text="${conductor.automovil}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-secondary"><i class="bi bi-tags"></i> Tipo de Automóvil</th>
+                                        <td class="text-dark fw-semibold" th:text="${conductor.tipoAutomovil}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-secondary"><i class="bi bi-check-circle"></i> Estado</th>
+                                        <td>
+                                            <span th:if="${conductor.estado}" class="badge bg-success">Activo</span>
+                                            <span th:unless="${conductor.estado}" class="badge bg-danger">Inactivo</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+        
+                            <!-- Botón para solicitar viaje -->
+                            <div class="text-center mt-4">
+                                <h4 class="fw-semibold">¿Listo para viajar?</h4>
+                                <a th:href="@{/RideOn/formReserva/{id}(id=${conductor.id})}" class="btn btn-lg btn-success shadow-sm">
+                                    <i class="bi bi-car-front-fill"></i> Solicitar Viaje
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</body>
+        </main>
+        
 
+
+
+
+
+
+
+    </main>
+
+    <br>
+    <br>
+
+    <footer>
+        <p>&copy; 2025 RIDE ON. Todos los derechos reservados.</p>
+    </footer>
+</body>
 </html>

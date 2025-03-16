@@ -38,14 +38,19 @@
             gap: 25px;
         }
         nav a {
-            color: white;
+            color: rgb(43, 43, 43);
             text-decoration: none;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            transition: 0.3s;
+            transition: transform 0.2s ease-in-out, color 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
         }
-        nav a:hover {
-            text-decoration: underline;
+        nav a:hover {   
+            transform: scale(1.1);
+            color: #000000; /* Azul Bootstrap */
+            text-decoration: none; /* Evita subrayado */
+            background: rgba(255, 255, 255, 0.2);
         }
         .user-avatar img {
             height: 50px;

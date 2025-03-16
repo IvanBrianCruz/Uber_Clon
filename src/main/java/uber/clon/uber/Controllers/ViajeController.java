@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import uber.clon.uber.Models.Conductor;
@@ -13,6 +14,7 @@ import uber.clon.uber.Services.ConductorService;
 import uber.clon.uber.Services.ViajeService;
 
 @Controller
+@RequestMapping("/RideOn")
 public class ViajeController {
     private final ViajeService viajeService;
     private final ConductorService conductorService;

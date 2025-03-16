@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <link rel="icon" type="image" href="/img/logo.png">
     <title>RIDE ON</title>
     <style>
@@ -39,14 +41,19 @@
             gap: 25px;
         }
         nav a {
-            color: white;
+            color: rgb(43, 43, 43);
             text-decoration: none;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            transition: 0.3s;
+            transition: transform 0.2s ease-in-out, color 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
         }
-        nav a:hover {
-            text-decoration: underline;
+        nav a:hover {   
+            transform: scale(1.1);
+            color: #000000; /* Azul Bootstrap */
+            text-decoration: none; /* Evita subrayado */
+            background: rgba(255, 255, 255, 0.2);
         }
         .user-avatar img {
             height: 50px;
@@ -92,31 +99,43 @@
     <main>
         
         <div class="container mt-5">
-            <h2 class="text-center">Selecciona un Conductor</h2>
+            <h2 class="text-center mb-4">Selecciona un Conductor</h2>
             <div class="row">
                 <!-- Iterar sobre los conductores -->
-                <div class="col-md-4" th:each="conductor : ${conductores}">
-                    <div class="card p-3">
-                        <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'" class="card-img-top" alt="Foto Conductor">
-                        
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="|${conductor.nombre} ${conductor.apellido}|"></h5>
-    
-                            <p class="card-text">Modelo de auto: <span th:text="${conductor.automovil}"></span></p>
-                            <p class="card-text">Tipo de Auto: <span th:text="${conductor.tipoAutomovil}"></span></p>
+                <div class="col-md-4 mb-4" th:each="conductor : ${conductores}">
+                    <br>
+                    <div class="card shadow-sm border-light rounded">
+                        <br>
+                        <br>
+                        <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'" 
+                             class="card-img-top rounded-circle mx-auto d-block" 
+                             alt="Foto Conductor" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-2" th:text="|${conductor.nombre} ${conductor.apellido}|"></h5>
                             
-                            <a th:href="@{/conductores/detalle/{id}(id=${conductor.id})}" class="btn btn-primary">Ver Detalles</a>
-    
+                            <p class="card-text text-muted mb-2">
+                                <i class="bi bi-car-front me-2"></i> Modelo de auto: <span th:text="${conductor.automovil}"></span>
+                            </p>
+                            <p class="card-text text-muted mb-3">
+                                <i class="bi bi-bookmark-star"></i> Tipo de Auto: <span th:text="${conductor.tipoAutomovil}"></span>
+                            </p>
+        
+                            <a th:href="@{/RideOn/detalle/{id}(id=${conductor.id})}" class="btn btn-primary w-100 mb-2">
+                                <i class="bi bi-info-circle me-2"></i> Ver Detalles
+                            </a>
+        
                             <!-- Formulario para eliminar conductor -->
-                            <form th:action="@{/conductores/eliminar/{id}(id=${conductor.id})}" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este conductor?')">Eliminar</button>
+                            <form th:action="@{/RideOn/eliminar/{id}(id=${conductor.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger w-100" onclick="return confirm('¿Estás seguro de que deseas eliminar este conductor?')">
+                                    <i class="bi bi-trash me-2"></i> Eliminar
+                                </button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
 
 
     </main>
