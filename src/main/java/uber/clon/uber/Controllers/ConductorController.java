@@ -11,20 +11,26 @@ import java.time.Period;
 import java.util.List;
 
 @Controller
-@RequestMapping("/conductores")
+@RequestMapping("/RideOn")
 public class ConductorController {
     private final ConductorService conductorService;
 
     public ConductorController(ConductorService conductorService) {
         this.conductorService = conductorService;
     }
+    // 🔹 Mostrar INDEX
+
+    @GetMapping("/")
+    public String index() {
+        return "index"; // Vista HTML
+    }
 
     // 🔹 Mostrar lista de conductores activos
-    @GetMapping
+    @GetMapping("/conductores")
     public String listarConductores(Model model) {
         List<Conductor> conductores = conductorService.listarConductores();
         model.addAttribute("conductores", conductores);
-        return "index"; // Vista HTML
+        return "cardConductores"; // Vista HTML
     }
 
     // 🔹 Mostrar formulario de registro

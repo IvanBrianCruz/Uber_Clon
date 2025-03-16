@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Viaje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     private TipoViaje tipo;
@@ -19,9 +19,10 @@ public class Viaje {
     private String destino;
     private boolean estado = true; 
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "conductor_id")
     private Conductor conductor;
+    
 
     // Constructor vacío
     public Viaje() {}
@@ -55,8 +56,8 @@ public class Viaje {
     }
 
     // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public TipoViaje getTipo() { return tipo; }
     public void setTipo(TipoViaje tipo) { this.tipo = tipo; }
