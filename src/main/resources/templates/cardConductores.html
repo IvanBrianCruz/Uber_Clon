@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,11 +15,14 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: Arial, sans-serif;
-            background: url('/img/fondo.png') no-repeat center center/cover; /* Imagen de fondo */
+            background: url('/img/fondo.png') no-repeat center center/cover;
+            /* Imagen de fondo */
             min-height: 100vh;
         }
+
         header {
             position: fixed;
             top: 0;
@@ -27,19 +31,25 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 30px;
-            backdrop-filter: blur(10px); /* Efecto vidrio */
-            background: rgba(147, 147, 147, 0.15); /* Transparente pero visible */
+            backdrop-filter: blur(10px);
+            /* Efecto vidrio */
+            background: rgba(147, 147, 147, 0.15);
+            /* Transparente pero visible */
             border-bottom: 1px solid rgba(255, 255, 255, 0.209);
             color: white;
             z-index: 1000;
         }
-        .logo img { 
-            height: 100px; /* Tamaño normal */
+
+        .logo img {
+            height: 100px;
+            /* Tamaño normal */
         }
+
         nav {
             display: flex;
             gap: 25px;
         }
+
         nav a {
             color: rgb(43, 43, 43);
             text-decoration: none;
@@ -49,20 +59,26 @@
             padding: 8px 12px;
             border-radius: 8px;
         }
-        nav a:hover {   
+
+        nav a:hover {
             transform: scale(1.1);
-            color: #000000; /* Azul Bootstrap */
-            text-decoration: none; /* Evita subrayado */
+            color: #000000;
+            /* Azul Bootstrap */
+            text-decoration: none;
+            /* Evita subrayado */
             background: rgba(255, 255, 255, 0.2);
         }
+
         .user-avatar img {
             height: 50px;
             width: 50px;
             border-radius: 50%;
             border: 2px solid white;
         }
+
         main {
-            padding-top: 100px; /* Espacio para que no se solape con el header */
+            padding-top: 100px;
+            /* Espacio para que no se solape con el header */
             min-height: 80vh;
             display: flex;
             justify-content: center;
@@ -70,6 +86,21 @@
             color: white;
             text-align: center;
         }
+
+        .banner {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .banner img {
+            width: 1300px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
         footer {
             background: rgba(0, 0, 0, 0.7);
             color: white;
@@ -82,6 +113,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -97,8 +129,21 @@
         </div>
     </header>
     <main>
-        
+
         <div class="container mt-5">
+
+
+            <!-- Banner principal -->
+
+            <div class="col-12">
+
+                <div class="banner">
+                    <img src="/img/carucel/4.png" alt="Banner Principal">
+                </div>
+
+            </div>
+            <br>
+            <br>
             <h2 class="text-center mb-4">Selecciona un Conductor</h2>
             <div class="row">
                 <!-- Iterar sobre los conductores -->
@@ -107,26 +152,30 @@
                     <div class="card shadow-sm border-light rounded">
                         <br>
                         <br>
-                        <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'" 
-                             class="card-img-top rounded-circle mx-auto d-block" 
-                             alt="Foto Conductor" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img th:src="'https://randomuser.me/api/portraits/men/' + ${conductor.id} % 100 + '.jpg'"
+                            class="card-img-top rounded-circle mx-auto d-block" alt="Foto Conductor"
+                            style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body text-center">
                             <h5 class="card-title mb-2" th:text="|${conductor.nombre} ${conductor.apellido}|"></h5>
-                            
+
                             <p class="card-text text-muted mb-2">
-                                <i class="bi bi-car-front me-2"></i> Modelo de auto: <span th:text="${conductor.automovil}"></span>
+                                <i class="bi bi-car-front me-2"></i> Modelo de auto: <span
+                                    th:text="${conductor.automovil}"></span>
                             </p>
                             <p class="card-text text-muted mb-3">
-                                <i class="bi bi-bookmark-star"></i> Tipo de Auto: <span th:text="${conductor.tipoAutomovil}"></span>
+                                <i class="bi bi-bookmark-star"></i> Tipo de Auto: <span
+                                    th:text="${conductor.tipoAutomovil}"></span>
                             </p>
-        
+
                             <a th:href="@{/RideOn/detalle/{id}(id=${conductor.id})}" class="btn btn-primary w-100 mb-2">
                                 <i class="bi bi-info-circle me-2"></i> Ver Detalles
                             </a>
-        
+
                             <!-- Formulario para eliminar conductor -->
-                            <form th:action="@{/RideOn/eliminar/{id}(id=${conductor.id})}" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-danger w-100" onclick="return confirm('¿Estás seguro de que deseas eliminar este conductor?')">
+                            <form th:action="@{/RideOn/eliminar/{id}(id=${conductor.id})}" method="post"
+                                class="d-inline">
+                                <button type="submit" class="btn btn-danger w-100"
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este conductor?')">
                                     <i class="bi bi-trash me-2"></i> Eliminar
                                 </button>
                             </form>
@@ -135,17 +184,16 @@
                 </div>
             </div>
         </div>
-        
+
 
 
     </main>
-    
-    <br>    
+
+    <br>
     <br>
     <footer>
         <p>&copy; 2025 RIDE ON. Todos los derechos reservados.</p>
     </footer>
 </body>
-</html>
 
-  
+</html>

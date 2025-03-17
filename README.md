@@ -1,5 +1,8 @@
 # 🚗 **RADE ON** - Tu propio servicio de viajes 🛣️
 
+![Descripción de la imagen](img/carucel/4.png) 
+
+
 **RADE ON** es una aplicación web que simula un servicio de transporte tipo Uber, donde los usuarios pueden registrar a conductores, visualizar sus datos y contratar viajes. A través de formularios fáciles de usar, los clientes pueden seleccionar un conductor, realizar un viaje y obtener un resumen detallado, ¡todo desde tu navegador! 🌐
 
 ## 🚀 Funcionalidades
