@@ -23,7 +23,7 @@ public class Conductor {
     @Enumerated(EnumType.STRING)
     private TipoAutomovil tipoAutomovil;
     // uno a muchos
-    @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)  // uno a muchos -- un conductor puede tener muchos viajes
     private List<Viaje> viajes = new ArrayList<>();
 
     @Column

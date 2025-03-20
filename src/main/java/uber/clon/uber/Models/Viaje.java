@@ -19,7 +19,7 @@ public class Viaje {
     private String destino;
     private boolean estado = true; 
 
-    @ManyToOne
+    @ManyToOne // muchos a uno --  muchos viajes pueden tener un conductor
     @JoinColumn(name = "conductor_id")
     private Conductor conductor;
     

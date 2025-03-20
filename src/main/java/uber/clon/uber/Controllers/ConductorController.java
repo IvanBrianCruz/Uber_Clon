@@ -44,14 +44,14 @@ public class ConductorController {
     @PostMapping("/guardar")
     public String registrarConductor(@ModelAttribute Conductor conductor) {
         conductorService.guardarConductor(conductor);
-        return "redirect:/conductores"; // Redirige a la lista
+        return "redirect:/RideOn/conductores"; // Redirige a la lista
     }
 
     // 🔹 "Eliminar" (desactivar) un conductor
     @PostMapping("/eliminar/{id}")
     public String eliminarConductor(@PathVariable int id) {
         conductorService.eliminarConductor(id); // Se desactiva (estado = false)
-        return "redirect:/conductores"; // Redirige a la lista
+        return "redirect:/RideOn/conductores"; // Redirige a la lista
     }
 
     // 🔹 Mostrar detalles de un conductor
@@ -61,7 +61,7 @@ public class ConductorController {
         Conductor conductor = conductorService.obtenerConductor(id);
 
         if (conductor == null) {
-            return "redirect:/conductores"; // Si no existe, vuelve a la lista
+            return "redirect:/RideOn/conductores"; // Si no existe, vuelve a la lista
         }
 
         int edad = Period.between(conductor.getFechaDeNacimiento(), LocalDate.now()).getYears();
