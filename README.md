@@ -1,6 +1,6 @@
 # 🚗 **RADE ON** - Tu propio servicio de viajes 🛣️
 
-![Baneer principal](https://raw.githubusercontent.com/IvanBrianCruz/Uber_Clon/refs/heads/master/src/main/resources/static/img/carucel/4.png?token=GHSAT0AAAAAAC5RKCIEYU7DWV37VSEFTB2EZ6YHXXQ) 
+![Baneer principal](https://raw.githubusercontent.com/IvanBrianCruz/Uber_Clon/refs/heads/master/src/main/resources/static/img/banner-github.png?) 
 
 
 **RADE ON** es una aplicación web que simula un servicio de transporte tipo Uber, donde los usuarios pueden registrar a conductores, visualizar sus datos y contratar viajes. A través de formularios fáciles de usar, los clientes pueden seleccionar un conductor, realizar un viaje y obtener un resumen detallado, ¡todo desde tu navegador! 🌐
