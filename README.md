@@ -21,6 +21,6 @@
 
 - **Frontend**: HTML, CSS, Bootstrap, Bootstrap Icons
 - **Backend**: Spring Boot, Thymeleaf
-- **Base de Datos**: MySQL (o cualquier otra base de datos compatible con Spring Data)
+- **Base de Datos**: MySQL
 - **Lenguaje**: Java
 
